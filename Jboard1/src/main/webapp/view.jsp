@@ -136,7 +136,7 @@
                 <tr>
                     <td>첨부파일</td>
                     <td>
-                        <a href="#"><%= article.getFb().getOriName() %></a>
+                        <a href="/Jboard1/proc/download.jsp?fseq=<%= article.getFb().getFseq() %>"><%= article.getFb().getOriName() %></a>
                         <span><%= article.getFb().getDownload() %>회 다운로드</span>
                     </td>
                 </tr>
@@ -150,8 +150,8 @@
             </table>
             <div>
             <% if(mb.getUid().equals(article.getUid())){ %>
-                <a href="#" class="btnDelete">삭제</a>
-                <a href="/Jboard1/modify.jsp" class="btnModify">수정</a>
+                <a href="Jboard1/proc/deleteProc.jsp?seq=<%= article.getSeq() %>" class="btnDelete">삭제</a>
+                <a href="/Jboard1/modify.jsp?seq=<%= article.getSeq() %>" class="btnModify">수정</a>
             <% } %>
                 <a href="/Jboard1/list.jsp" class="btnList">목록</a>
            	
