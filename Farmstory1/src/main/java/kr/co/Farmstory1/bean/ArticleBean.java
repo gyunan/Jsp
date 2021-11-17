@@ -101,5 +101,4 @@ public class ArticleBean {
 		this.rdate = rdate;
 	}
 	
-	
 }

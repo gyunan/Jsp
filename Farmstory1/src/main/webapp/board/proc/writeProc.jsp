@@ -1,4 +1,3 @@
-
 <%@page import="java.io.File"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -12,18 +11,17 @@
 	
 	//Multipart 전송 데이터 수신(파일 업로드와 동시에 처리)
 	String path = request.getServletContext().getRealPath("/file");
-	int maxSize = 1024 * 1024 * 10;
+	int maxSize = 1024 * 1024 * 10; // 최대 파일 허용량 10MB
 	
 	MultipartRequest mRequest = new MultipartRequest(request, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
-
-	String cate = mRequest.getParameter("cate");
-	String title = mRequest.getParameter("title");
-	String content = mRequest.getParameter("content");
-	String uid = mRequest.getParameter("uid");
-	String uri = mRequest.getParameter("uri");
-	String fname = mRequest.getFilesystemName("fname");
-	String regip = request.getRemoteAddr();
 	
+	String cate    = mRequest.getParameter("cate");
+	String title   = mRequest.getParameter("title");
+	String content = mRequest.getParameter("content");
+	String uid     = mRequest.getParameter("uid");
+	String uri     = mRequest.getParameter("uri");
+	String fname   = mRequest.getFilesystemName("fname"); // 첨부파일 이름
+	String regip   = request.getRemoteAddr();
 	
 	ArticleBean article = new ArticleBean();
 	article.setCate(cate);
@@ -42,7 +40,7 @@
 		int i = fname.lastIndexOf(".");
 		String ext = fname.substring(i);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMDDHHMMss_");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss_");
 		String now = sdf.format(new Date());
 		String newName = now+uid+ext;
 		
@@ -50,9 +48,10 @@
 		File newFile = new File(path+"/"+newName);
 		
 		oriFile.renameTo(newFile);
+		
 		// 파일 테이블 INSERT
 		ArticleDao.getInstance().insertFile(seq, fname, newName);
 	}
-
-	response.sendRedirect(uri);	
+	
+	response.sendRedirect(uri);
 %>

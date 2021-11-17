@@ -105,10 +105,18 @@
 				'outline': 'none'
 			});	
 		});
+		$('.btnCancel').click(function(){
+			var textarea = $(this).parent().prev();
+			textarea.val(content);		
+			textarea.text('')
+		});
 		
 		
 	});
 </script>
+<style>
+	*:focus { outline: 0; }
+</style>
 <section id="board" class="view">
     <h3>글보기</h3>
     <table>

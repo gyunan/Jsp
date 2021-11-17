@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String uri = request.getRequestURI();
+
 	int begin = uri.lastIndexOf("/")+1;
 	int end   = uri.lastIndexOf(".");
 	

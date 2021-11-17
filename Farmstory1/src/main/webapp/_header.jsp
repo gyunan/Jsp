@@ -12,7 +12,7 @@
 	
 	if(mode.equals("w") || mode.equals("V") || mode.equals("m")){
 		if(mb == null){
-			response.sendRedirect("/Farmstory1/user/login/jsp?success=102");
+			response.sendRedirect("/Farmstory1/user/login.jsp?success=102");
 			return;
 		}
 	}

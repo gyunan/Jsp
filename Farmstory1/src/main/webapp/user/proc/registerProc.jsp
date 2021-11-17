@@ -1,3 +1,5 @@
+<%@page import="kr.co.Farmstory1.dao.MemberDao"%>
+<%@page import="kr.co.Farmstory1.bean.MemberBean"%>
 <%@page import="kr.co.Farmstory1.db.DBConfig"%>
 <%@page import="kr.co.Farmstory1.db.Sql"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -6,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%	
 	// 전송 데이터 수신
-	request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8"); // 한글데이터로 복호화
+
 	String uid   = request.getParameter("uid");
 	String pass1 = request.getParameter("pass1");
 	String name  = request.getParameter("name");
@@ -17,10 +20,11 @@
 	String addr1 = request.getParameter("addr1");
 	String addr2 = request.getParameter("addr2");
 	String regip = request.getRemoteAddr();
+	
 	try{
-		// 1,2단계
-		Connection conn= DBConfig.getInstance().getConnection();
-		// 3단계
+		
+		Connection conn = DBConfig.getInstance().getConnection();
+		
 		PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_MEMBER);
 		psmt.setString(1, uid);
 		psmt.setString(2, pass1);
@@ -32,18 +36,15 @@
 		psmt.setString(8, addr1);
 		psmt.setString(9, addr2);
 		psmt.setString(10, regip);
-		
-		// 4단계
-		psmt.executeUpdate();		
-		// 5단계
-		
-		// 6단계
+		psmt.executeLargeUpdate();
 		psmt.close();
 		conn.close();
+	}catch(Exception e){ 
 		
-	}catch(Exception e){
 		e.printStackTrace();
+	
 	}
+	
 	// 리다이렉트
 	response.sendRedirect("/Farmstory1/user/login.jsp");
 %>
