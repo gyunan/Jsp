@@ -6,9 +6,9 @@ Jsp 수업예제
 
 ### Ch2.Jsp Scriptlet, 제어문 실습
 > JSP Scriptlet 실습하기
-</br>
+></br>
 > JSP 조건문 실습하기
-</br>
+></br>
 > JSP 반복문 실습하기
 
 ### Jboard 게시판 구현 실습
